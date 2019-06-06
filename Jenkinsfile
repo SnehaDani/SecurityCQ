@@ -4,7 +4,7 @@ pipeline {
         
         stage('host') {
             steps {
-                sh "ssh -o StrictHostKeyChecking=no centos@54.171.245.132 'echo $HOME'"
+                sh "ssh -o StrictHostKeyChecking=no aitrived@34.243.104.124 'echo $HOME'"
         }
         }
         
