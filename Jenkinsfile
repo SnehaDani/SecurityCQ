@@ -15,7 +15,7 @@ pipeline {
             steps {
                 
             sh label: '', script: ' java -jar target/secure-aem-1.3.3-SNAPSHOT.jar -a http://54.171.245.132:5000 -aCredentials admin:admin'
-       
+       sh "ssh -o StrictHostKeyChecking=no ssh -A centos@54.171.245.132 'echo $HOME'"
              
             }
         }
