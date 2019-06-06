@@ -1,8 +1,17 @@
 pipeline {
     agent any 
     stages {
+        
+        stage('host') {
+            steps {
+                sh "ssh -o StrictHostKeyChecking=no centos@54.171.245.132 'echo $HOME'"
+        }
+        }
+        
+        
         stage('Build') { 
             steps {
+              
                     sh label: '', script: ' mvn clean package crx:install -Dinstance.url=http://54.171.245.132:5000 -Dinstance.username=admin -Dinstance.password=admin'
             }
         }
@@ -13,9 +22,9 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                
+               
             sh label: '', script: ' java -jar target/secure-aem-1.3.3-SNAPSHOT.jar -a http://54.171.245.132:5000 -aCredentials admin:admin'
-       sh "ssh -o StrictHostKeyChecking=no centos@54.171.245.132 'echo $HOME'"
+       
              
             }
         }
